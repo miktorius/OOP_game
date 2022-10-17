@@ -13,6 +13,7 @@ public:
     void start();
     void notify(UserCommand);
     void notifySize(int x, int y);
+    void notifySize();
     bool gameIsRunning() const;
     void endGame();
 private:

@@ -10,6 +10,7 @@ class Controller;
 class Controller {
 public:
     Controller(GameMediator *mediator, int w, int h);
+    Controller(GameMediator *mediator);
     void run();
     void onCommand(UserCommand cmd);
 private:

@@ -1,4 +1,4 @@
-#include "core/controller.hpp"
+#include "core/game_mediator.hpp"
 
 int main() {
     GameMediator game;

@@ -24,3 +24,8 @@ void GameMediator::notifySize(int x, int y){
     controller = new Controller(this, x, y);
     controller->run();
 }
+
+void GameMediator::notifySize(){
+    controller = new Controller(this);
+    controller->run();
+}

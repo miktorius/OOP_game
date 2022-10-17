@@ -12,6 +12,14 @@ Controller::Controller(GameMediator *mediator, int w, int h)
     mediator(mediator),
     view(FieldView()) {}
 
+Controller::Controller(GameMediator *mediator) 
+    : field(Field()), 
+    player(Player()), 
+    playerPosition({0,0}), 
+    w(field.get_size().x), h(field.get_size().y),
+    mediator(mediator),
+    view(FieldView()) {}
+
 void Controller::run() {
     field.change_cell_passability({1,1}, false);
     view.drawField(field, playerPosition);
