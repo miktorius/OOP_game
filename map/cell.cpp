@@ -1,11 +1,11 @@
 #include "cell.hpp"
 
-Cell::Cell(bool passable) : isPassable(passable) {}
+Cell::Cell(bool passable) : passability(passable) {}
 
-void Cell::setPassable(bool passable) {isPassable = passable;}
+void Cell::setPassable(bool passable) { passability = passable; }
 
 void Cell::setEvent() {};
 
-bool Cell::isPassable() const { return isPassable; }
+bool Cell::isPassable() const { return passability; }
 
 Cell::~Cell() {}
