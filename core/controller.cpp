@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "../map/field.hpp"
 #include "../graphics/field_view.hpp"
+#include "../utils/vector2i.hpp"
 
 Controller::Controller(GameMediator *mediator, int w, int h) 
     : field(Field(w, h)), 
@@ -26,25 +27,29 @@ void Controller::run() {
 }
 
 void Controller::onCommand(UserCommand cmd){
-
+    Vector2i tmpPos = playerPosition;
     switch(cmd) {
     case UserCommand::UP:
-        playerPosition.y -= 1;
+        tmpPos.y -= 1;
         break;
     case UserCommand::LEFT:
-        playerPosition.x -= 1;
+        tmpPos.x -= 1;
         break;
     case UserCommand::DOWN:
-        playerPosition.y += 1;
+        tmpPos.y += 1;
         break;
     case UserCommand::RIGHT:
-        playerPosition.x += 1;
+        tmpPos.x += 1;
         break;
     case UserCommand::ESC:
         mediator->endGame();
         break;
     }
-    playerPosition.x = (playerPosition.x + w) % w;
-    playerPosition.y = (playerPosition.y + h) % h;
+    tmpPos.x = (tmpPos.x + w) % w;
+    tmpPos.y = (tmpPos.y + h) % h;
+    if (field.get_cell_passability(tmpPos)){
+        playerPosition.x = tmpPos.x;
+        playerPosition.y = tmpPos.y;
+    }
     view.drawField(field, playerPosition);
 }
