@@ -45,11 +45,16 @@ void Controller::onCommand(UserCommand cmd){
         mediator->endGame();
         break;
     }
-    tmpPos.x = (tmpPos.x + w) % w;
-    tmpPos.y = (tmpPos.y + h) % h;
-    if (field.getCellPassability(tmpPos)){
-        playerPosition.x = tmpPos.x;
-        playerPosition.y = tmpPos.y;
+    if (cmd == UserCommand::ESC) {
+        system("clear");
     }
-    view.drawField(field, playerPosition);
+    else {
+        tmpPos.x = (tmpPos.x + w) % w;
+        tmpPos.y = (tmpPos.y + h) % h;
+        if (field.getCellPassability(tmpPos)){
+            playerPosition.x = tmpPos.x;
+            playerPosition.y = tmpPos.y;
+        }
+        view.drawField(field, playerPosition);
+    }
 }
