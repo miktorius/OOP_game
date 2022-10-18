@@ -38,17 +38,29 @@ void CommandReader::readSize() {
     std::string input;
     system("clear");
     while ((input != "1") || (input != "2")){
-        std::cout << "Enter :\nCustom size - 1\nDefault size - 2\n";
+        std::cout << "Custom size - 1\nDefault size - 2\nQuit - q\n\nInput : ";
         std::cin >> input;
         if (input == "1"){
             system("clear");
-            std::cout << "Enter field size (x, y) : ";
-            std::cin >> x >> y;
-            mediator->notifySize(x, y);
+            while ((x < 5 || x > 15) || (y < 5 || y > 15)){
+                std::cout << "min = 5, max = 15\nEnter field size (width, height) : ";
+                std::cin >> x >> y;
+                if ((x >= 5 && x <= 15) && (y >= 5 && y <= 15)){
+                    mediator->notifySize(x, y);
+                }
+                else {
+                    system("clear");
+                    std::cout << "Input error, please try again.\n";                  
+                }
+            }
             break;
         }
         else if (input == "2"){
             mediator->notifySize();
+            break;
+        }
+        else if (input == "q") {
+            mediator->endGame();
             break;
         }
         else {
