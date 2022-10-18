@@ -5,19 +5,19 @@ class Controller;
 #include "../entities/player.hpp"
 #include "../utils/vector2i.hpp"
 #include "../graphics/field_view.hpp"
-#include "game_mediator.hpp"
+#include "mediator.hpp"
 
 class Controller {
 public:
-    Controller(GameMediator *mediator, int w, int h);
-    Controller(GameMediator *mediator);
+    Controller(Mediator *mediator, int w, int h);
+    Controller(Mediator *mediator);
     void run();
     void onCommand(UserCommand cmd);
 private:
     Field field;
     Player player;
     Vector2i playerPosition;
-    GameMediator *mediator;
+    Mediator *mediator;
     FieldView view;
     int w,h;
 };

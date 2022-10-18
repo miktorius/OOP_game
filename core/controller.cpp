@@ -5,7 +5,7 @@
 #include "../graphics/field_view.hpp"
 #include "../utils/vector2i.hpp"
 
-Controller::Controller(GameMediator *mediator, int w, int h) 
+Controller::Controller(Mediator *mediator, int w, int h) 
     : field(Field(w, h)), 
     player(Player()), 
     playerPosition({0,0}), 
@@ -13,7 +13,7 @@ Controller::Controller(GameMediator *mediator, int w, int h)
     mediator(mediator),
     view(FieldView()) {}
 
-Controller::Controller(GameMediator *mediator) 
+Controller::Controller(Mediator *mediator) 
     : field(Field()), 
     player(Player()), 
     playerPosition({0,0}), 

@@ -1,15 +1,15 @@
 #ifndef GAME_MEDIATOR_HPP
 #define GAME_MEDIATOR_HPP
-class GameMediator;
+class Mediator;
 enum class UserCommand {
     UP, DOWN, LEFT, RIGHT, ESC, UNKNOWN
 };
 #include "commandreader.hpp"
 #include "controller.hpp"
 
-class GameMediator {
+class Mediator {
 public:
-    GameMediator();
+    Mediator();
     void start();
     void notify(UserCommand);
     void notifySize(int x, int y);

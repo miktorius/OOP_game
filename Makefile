@@ -10,8 +10,8 @@ SOURCES = main.cpp \
 		entities/player.cpp \
 		core/commandreader.cpp \
 		core/controller.cpp \
-		core/game_mediator.cpp
-		
+		core/mediator.cpp \
+		events/event.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
 

@@ -1,7 +1,7 @@
-#include "core/game_mediator.hpp"
+#include "core/mediator.hpp"
 
 int main() {
-    GameMediator game;
+    Mediator game;
     game.start();
     return 0;
 }

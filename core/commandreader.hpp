@@ -1,13 +1,13 @@
 #ifndef COMMAND_READER_HPP
 #define COMMAND_READER_HPP
 class CommandReader;
-#include "game_mediator.hpp"
+#include "mediator.hpp"
 
 class CommandReader {
 private:
-    GameMediator *mediator;
+    Mediator *mediator;
 public:
-    CommandReader(GameMediator *mediator);
+    CommandReader(Mediator *mediator);
     void readCommands();
     void readSize();
 };

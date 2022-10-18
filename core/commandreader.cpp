@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-CommandReader::CommandReader(GameMediator *mediator) : mediator(mediator) {}
+CommandReader::CommandReader(Mediator *mediator) : mediator(mediator) {}
 
 void CommandReader::readCommands() {
     while(mediator->gameIsRunning()) {
