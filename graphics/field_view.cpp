@@ -9,9 +9,9 @@ void FieldView::drawField(const Field &field, Vector2i playerPosition) {
     for(int i = 0; i < field.getSize().y; i++) {
         for(int j = 0; j < field.getSize().x; j++) {
             if (playerPosition.x == j && playerPosition.y == i) 
-                std::cout << "P";
+                std::cout << "▣ ";
             else 
-                std::cout << (field.getCellPassability({j,i}) ? "_" : "#"); //todo : extract to CellView
+                std::cout << (field.getCellPassability({j,i}) ? "□ " : "■ "); //todo : extract to CellView
         }
         std::cout << "\n";
     }

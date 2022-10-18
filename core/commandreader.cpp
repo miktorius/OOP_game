@@ -60,6 +60,7 @@ void CommandReader::readSize() {
             break;
         }
         else if (input == "q") {
+            system("clear");
             mediator->endGame();
             break;
         }
