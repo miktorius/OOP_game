@@ -2,10 +2,10 @@
 
 Cell::Cell(bool passable) : isPassable(passable) {}
 
-void Cell::set_passable(bool passable) {isPassable = passable;}
+void Cell::setPassable(bool passable) {isPassable = passable;}
 
-void Cell::set_event() {};
+void Cell::setEvent() {};
 
-bool Cell::is_passable() const { return isPassable; }
+bool Cell::isPassable() const { return isPassable; }
 
 Cell::~Cell() {}

@@ -11,12 +11,12 @@ Field::Field(int width, int height) : width(width), height(height) {
         );
 }
 
-Vector2i Field::get_size() const {return {width, height};}
+Vector2i Field::getSize() const {return {width, height};}
 
-void Field::change_cell_passability(Vector2i position, bool passable) {
-    map[position.y][position.x].set_passable(passable);
+void Field::changeCellPassability(Vector2i position, bool passable) {
+    map[position.y][position.x].setPassable(passable);
 }
 
-bool Field::get_cell_passability(Vector2i position) const {
-    return map[position.y][position.x].is_passable();
+bool Field::getCellPassability(Vector2i position) const {
+    return map[position.y][position.x].isPassable();
 }

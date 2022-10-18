@@ -17,12 +17,12 @@ Controller::Controller(Mediator *mediator)
     : field(Field()), 
     player(Player()), 
     playerPosition({0,0}), 
-    w(field.get_size().x), h(field.get_size().y),
+    w(field.getSize().x), h(field.getSize().y),
     mediator(mediator),
     view(FieldView()) {}
 
 void Controller::run() {
-    field.change_cell_passability({1,1}, false);
+    field.changeCellPassability({1,1}, false);
     view.drawField(field, playerPosition);
 }
 
@@ -47,7 +47,7 @@ void Controller::onCommand(UserCommand cmd){
     }
     tmpPos.x = (tmpPos.x + w) % w;
     tmpPos.y = (tmpPos.y + h) % h;
-    if (field.get_cell_passability(tmpPos)){
+    if (field.getCellPassability(tmpPos)){
         playerPosition.x = tmpPos.x;
         playerPosition.y = tmpPos.y;
     }
