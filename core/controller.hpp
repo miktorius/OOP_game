@@ -16,7 +16,6 @@ public:
 private:
     Field field;
     Player player;
-    Vector2i playerPosition;
     Mediator *mediator;
     FieldView view;
     int w,h;

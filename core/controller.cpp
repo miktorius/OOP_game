@@ -8,7 +8,6 @@
 Controller::Controller(Mediator *mediator, int w, int h) 
     : field(Field(w, h)), 
     player(Player()), 
-    playerPosition({0,0}), 
     w(w), h(h),
     mediator(mediator),
     view(FieldView()) {}
@@ -16,18 +15,18 @@ Controller::Controller(Mediator *mediator, int w, int h)
 Controller::Controller(Mediator *mediator) 
     : field(Field()), 
     player(Player()), 
-    playerPosition({0,0}), 
     w(field.getSize().x), h(field.getSize().y),
     mediator(mediator),
     view(FieldView()) {}
 
 void Controller::run() {
     field.changeCellPassability({1,1}, false);
-    view.drawField(field, playerPosition);
+    view.drawField(field, field.getPlayerPosition());
 }
 
 void Controller::onCommand(UserCommand cmd){
-    Vector2i tmpPos = playerPosition;
+    Vector2i tmpPos = field.getPlayerPosition();
+    //field.getMap()[tmpPos.x][tmpPos.y].detectPlayer();
     switch(cmd) {
     case UserCommand::UP:
         tmpPos.y -= 1;
@@ -52,9 +51,8 @@ void Controller::onCommand(UserCommand cmd){
         tmpPos.x = (tmpPos.x + w) % w;
         tmpPos.y = (tmpPos.y + h) % h;
         if (field.getCellPassability(tmpPos)){
-            playerPosition.x = tmpPos.x;
-            playerPosition.y = tmpPos.y;
+            field.setPlayerPosition(tmpPos);
         }
-        view.drawField(field, playerPosition);
+        view.drawField(field, field.getPlayerPosition());
     }
 }

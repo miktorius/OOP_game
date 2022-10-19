@@ -9,6 +9,7 @@ class Field{
 private:
     int width;
     int height;
+    Vector2i playerPosition;
     std::vector< std::vector<Cell> > map;
 public:
     Field();
@@ -23,6 +24,8 @@ public:
     ~Field();
 
     Vector2i getSize() const;
+    Vector2i getPlayerPosition() const;
+    void setPlayerPosition(Vector2i argPos);
     std::vector<std::vector<Cell>> getMap() const;
     void changeCellPassability(Vector2i position, bool passable);
     bool getCellPassability(Vector2i position) const;
