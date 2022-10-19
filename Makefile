@@ -6,6 +6,7 @@ SOURCES = main.cpp \
 		map/cell.cpp \
 		map/field.cpp \
 		graphics/field_view.cpp \
+		graphics/cell_view.cpp \
 		entities/entity.cpp \
 		entities/player.cpp \
 		core/commandreader.cpp \

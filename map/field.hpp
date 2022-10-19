@@ -13,7 +13,17 @@ private:
 public:
     Field();
     Field(int width, int height);
-    Vector2i getSize() const;  
+
+    Field(const Field &copy);
+    Field &operator=(const Field &copy);
+
+    Field(Field &&move);
+    Field &operator=(Field &&move);  
+
+    ~Field();
+
+    Vector2i getSize() const;
+    std::vector<std::vector<Cell>> getMap() const;
     void changeCellPassability(Vector2i position, bool passable);
     bool getCellPassability(Vector2i position) const;
 };
