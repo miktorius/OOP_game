@@ -67,7 +67,9 @@ Field &Field::operator=(Field &&move){
     return *this;
 }
 
-Field::~Field() {};
+Field::~Field() {
+    map.clear();
+};
 
 Vector2i Field::getSize() const { return {width, height}; }
 

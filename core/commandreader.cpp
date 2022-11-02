@@ -35,16 +35,34 @@ void CommandReader::readCommands() {
 
 void CommandReader::readSize() {
     int x, y;
-    std::string input;
+    std::string input, inputX, inputY;
+    bool inputIsCorrect;
     system("clear");
     while ((input != "1") || (input != "2")){
-        std::cout << "Custom size - 1\nDefault size - 2\nQuit - q\n\nInput : ";
+        std::cout << "Custom size - 1\nDefault size (10 x 10) - 2\nQuit - q\n\nInput : ";
         std::cin >> input;
         if (input == "1"){
             system("clear");
             while ((x < 5 || x > 15) || (y < 5 || y > 15)){
+                inputIsCorrect = true;
                 std::cout << "min = 5, max = 15\nEnter field size (width, height) : ";
-                std::cin >> x >> y;
+                std::cin >> inputX >> inputY;
+                for (int i = 0; i < inputX.length(); i++) { // идем по символам
+                    if (inputX[i] >= 'A' && inputX[i] <= 'Z' || inputX[i] >= 'a' && inputX[i] <= 'z') {
+                        inputIsCorrect = false;
+                        break;
+                    } 
+                }
+                for (int i = 0; i < inputY.length(); i++) { // идем по символам
+                    if (inputY[i] >= 'A' && inputY[i] <= 'Z' || inputY[i] >= 'a' && inputY[i] <= 'z') {
+                        inputIsCorrect = false;
+                        break;
+                    } 
+                }
+                if (inputIsCorrect){
+                    x = stoi(inputX);
+                    y = stoi(inputY);
+                }
                 if ((x >= 5 && x <= 15) && (y >= 5 && y <= 15)){
                     mediator->notifySize(x, y);
                 }

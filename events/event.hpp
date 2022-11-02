@@ -3,7 +3,7 @@
 
 class Event {
 public:
-    // virtual void call(/**/) = 0;
+    //virtual void execute() = 0;
     // virtual ~Event() = default;
 };
 
