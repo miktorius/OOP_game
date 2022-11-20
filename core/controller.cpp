@@ -4,29 +4,67 @@
 #include "../map/field.hpp"
 #include "../graphics/field_view.hpp"
 #include "../utils/vector2i.hpp"
+#include "../events/playerEvents/eventHeal.hpp"
+#include "../events/playerEvents/eventTrap.hpp"
 
 Controller::Controller(Mediator *mediator, int w, int h) 
-    : field(Field(w, h)), 
+    : field(new Field(w, h)), 
     player(Player()), 
-    w(w), h(h),
-    mediator(mediator),
-    view(FieldView()) {}
+    mediator(mediator){}
 
 Controller::Controller(Mediator *mediator) 
-    : field(Field()), 
-    player(Player()), 
-    w(field.getSize().x), h(field.getSize().y),
-    mediator(mediator),
-    view(FieldView()) {}
+    : field(new Field), 
+    player(Player()),
+    mediator(mediator){}
 
 void Controller::run() {
-    field.changeCellPassability({1,1}, false);
-    view.drawField(field, field.getPlayerPosition());
+    Event* eventHPDec = new eventTrap;
+    Event* eventHPInc = new eventHeal;
+    field->changeCellPassability({1,1}, false);
+    field->setCellEvent({2, 2}, eventHPDec);
+    field->setCellEvent({3, 3}, eventHPInc);
+    FieldView::drawField(*field, field->getPlayerPosition(), player);
 }
 
+Player& Controller::getPlayer(){
+    return player;
+}
+
+/* 
+
+enum class GameState {Win, Loss, Playing};
+
+class StateMediator {
+private:
+    Controller *c;
+    StateEvent *e;
+public:
+    StateMediator( Controller *ctrl, StateEvent *ev ) : c(ctrl), e(ev);
+    void changeState(GameState newState) {
+        controller->onStateChange(newState);
+    }
+};
+
+Controller / private: GameState gameState (GameState::Playing)
+Controller / public: StateMediator* getStateMediator();
+
+void Controller::onStateChange(GameState newState) {
+    if (newState == GameState::Win) {
+        cout << "You won!";
+        mediator->endGame();
+    }
+
+}
+
+void VictoryEvent::execute(Controller &ctrl) {
+    ctrl.getStateMediator()->changeState(GameState::Win);
+}
+
+*/ 
+
 void Controller::onCommand(UserCommand cmd){
-    Vector2i tmpPos = field.getPlayerPosition();
-    //field.getMap()[tmpPos.x][tmpPos.y].detectPlayer();
+    Vector2i tmpPos = field->getPlayerPosition();
+    //field->getMap()[tmpPos.x][tmpPos.y].detectPlayer();
     switch(cmd) {
     case UserCommand::UP:
         tmpPos.y -= 1;
@@ -45,14 +83,17 @@ void Controller::onCommand(UserCommand cmd){
         break;
     }
     if (cmd == UserCommand::ESC) {
-        system("clear");
+        system("cls");
     }
     else {
-        tmpPos.x = (tmpPos.x + w) % w;
-        tmpPos.y = (tmpPos.y + h) % h;
-        if (field.getCellPassability(tmpPos)){
-            field.setPlayerPosition(tmpPos);
+        auto size = field->getSize();
+        tmpPos.x = (tmpPos.x + size.x) % size.x;
+        tmpPos.y = (tmpPos.y + size.y) % size.y;
+        if (field->getCellPassability(tmpPos)){
+            field->setPlayerPosition(tmpPos);
+            field->activateCellEvent(tmpPos, *this);
         }
-        view.drawField(field, field.getPlayerPosition());
+
+        FieldView::drawField(*field, field->getPlayerPosition(), player);
     }
 }

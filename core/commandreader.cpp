@@ -37,12 +37,12 @@ void CommandReader::readSize() {
     int x, y;
     std::string input, inputX, inputY;
     bool inputIsCorrect;
-    system("clear");
+    system("cls");
     while ((input != "1") || (input != "2")){
         std::cout << "Custom size - 1\nDefault size (10 x 10) - 2\nQuit - q\n\nInput : ";
         std::cin >> input;
         if (input == "1"){
-            system("clear");
+            system("cls");
             while ((x < 5 || x > 15) || (y < 5 || y > 15)){
                 inputIsCorrect = true;
                 std::cout << "min = 5, max = 15\nEnter field size (width, height) : ";
@@ -67,7 +67,7 @@ void CommandReader::readSize() {
                     mediator->notifySize(x, y);
                 }
                 else {
-                    system("clear");
+                    system("cls");
                     std::cout << "Input error, please try again.\n";                  
                 }
             }
@@ -78,12 +78,12 @@ void CommandReader::readSize() {
             break;
         }
         else if (input == "q") {
-            system("clear");
+            system("cls");
             mediator->endGame();
             break;
         }
         else {
-            system("clear");
+            system("cls");
             std::cout << "Input error, please try again.\n";
         }
     }

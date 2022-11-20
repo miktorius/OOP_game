@@ -1,12 +1,14 @@
 #include "cell.hpp"
 
-Cell::Cell(bool passable/*, bool detection*/) : passability(passable)/*, playerDetected(detection)*/ {}
+Cell::Cell(bool passable/*, bool detection*/) : passability(passable), event(nullptr)/*, playerDetected(detection)*/ {}
 
 void Cell::setPassable(bool passable) { passability = passable; }
 
-void Cell::setEvent() {}
+void Cell::setEvent(Event* evnt) { event = evnt; }
 
-void Cell::activateEvent() {}
+void Cell::activateEvent(Controller& ctrl) {
+    if (event!=nullptr) { event->execute(ctrl); }
+}
 
 // bool Cell::isPlayerDetected() { return playerDetected; }
 

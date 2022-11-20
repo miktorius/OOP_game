@@ -2,9 +2,6 @@
 #define EVENT_PLAYER_HPP
 #include "event.hpp"
 
-class playerEvent : public Event{
-public:
-    void execute();
-};
-
+class playerEvent : public Event{};
+    
 #endif

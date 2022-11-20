@@ -1,6 +1,4 @@
 #include "field.hpp"
-#include "cell.hpp"
-#include "../utils/vector2i.hpp"
 #include <vector>
 
 Field::Field() : Field(10,10) {}
@@ -81,6 +79,14 @@ std::vector<std::vector<Cell>> Field::getMap() const { return map; }
 
 void Field::changeCellPassability(Vector2i position, bool passable) {
     map[position.y][position.x].setPassable(passable);
+}
+
+void Field::setCellEvent(Vector2i position, Event* evnt){
+    map[position.y][position.x].setEvent(evnt);
+}
+
+void Field::activateCellEvent(Vector2i position, Controller& ctrl){
+    map[position.y][position.x].activateEvent(ctrl);
 }
 
 bool Field::getCellPassability(Vector2i position) const {

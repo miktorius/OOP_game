@@ -1,11 +1,14 @@
 #ifndef FIELD_HPP
 #define FIELD_HPP
 
+class Field;
+
 #include <vector>
 #include "../utils/vector2i.hpp"
+//#include "../events/event.hpp"
 #include "cell.hpp"
 
-class Field{
+class Field {
 private:
     int width;
     int height;
@@ -24,10 +27,19 @@ public:
     ~Field();
 
     Vector2i getSize() const;
+
     Vector2i getPlayerPosition() const;
+
     void setPlayerPosition(Vector2i argPos);
+
     std::vector<std::vector<Cell>> getMap() const;
+
     void changeCellPassability(Vector2i position, bool passable);
+
+    void setCellEvent(Vector2i position, Event* evnt);
+
+    void activateCellEvent(Vector2i position, Controller& ctrl);
+
     bool getCellPassability(Vector2i position) const;
 };
 

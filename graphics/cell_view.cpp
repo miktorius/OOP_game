@@ -2,5 +2,5 @@
 #include "cell_view.hpp"
 
 void CellView::viewCurrentCell(const Cell &cell) {
-    std::cout << (cell.isPassable() ? "▪ " : "■ "); //todo : extract to CellView
+    std::cout << (cell.isPassable() ? "_ " : "# "); //todo : extract to CellView
 }

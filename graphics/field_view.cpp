@@ -5,13 +5,13 @@
 
 #include <iostream>
 
-void FieldView::drawField(const Field &field, Vector2i playerPosition) {
+void FieldView::drawField(const Field &field, Vector2i playerPosition, const Player& player) {
     CellView viewCell;
-    system("clear");
+    //system("cls");
     for(int i = 0; i < field.getSize().y; i++) {
         for(int j = 0; j < field.getSize().x; j++) {
             if (playerPosition.x == j && playerPosition.y == i) {
-                std::cout << "▣ ";
+                std::cout << "P ";
                 //field.getMap()[j][i].detectPlayer();
             }
             else 
@@ -19,7 +19,9 @@ void FieldView::drawField(const Field &field, Vector2i playerPosition) {
         }
         std::cout << "\n";
     }
-    std::cout << "\nInput : ";
+    std::cout << "\nHP : " << player.getHP() 
+              << "\nWeight : " << player.getWeight()  
+              << "\nInput : ";
 
     // for(int i = 0; i < field.getSize().y; i++) {
     //     for(int j = 0; j < field.getSize().x; j++) {
