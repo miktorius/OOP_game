@@ -4,7 +4,7 @@
 
 class playerEvent : public Event{
 public:
-    void execute() override = 0;
+    void execute();
 };
 
 #endif

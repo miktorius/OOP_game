@@ -16,7 +16,7 @@ public:
 private:
     bool passability;
     bool playerDetected;
-    Event event;
+    Event* event;
 };
 
 #endif
