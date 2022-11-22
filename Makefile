@@ -16,8 +16,11 @@ SOURCES = main.cpp \
 		events\event.cpp \
 		events\playerEvents\eventHeal.cpp \
 		events\playerEvents\eventHurt.cpp \
+		events\playerEvents\eventGetWeight.cpp \
+		events\playerEvents\eventLoseWeight.cpp \
 		events\stateEvents\eventVictory.cpp \
-		events\stateEvents\eventDefeat.cpp
+		events\stateEvents\eventDefeat.cpp \
+		events\mapEvents\eventTrap.cpp
 
 
 OBJECTS = $(SOURCES:.cpp=.o)

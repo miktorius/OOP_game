@@ -6,8 +6,11 @@
 #include "../utils/vector2i.hpp"
 #include "../events/playerEvents/eventHeal.hpp"
 #include "../events/playerEvents/eventHurt.hpp"
+#include "../events/playerEvents/eventGetWeight.hpp"
+#include "../events/playerEvents/eventLoseWeight.hpp"
 #include "../events/stateEvents/eventVictory.hpp"
 #include "../events/stateEvents/eventDefeat.hpp"
+#include "../events/mapEvents/eventTrap.hpp"
 
 Controller::Controller(Mediator *mediator, int w, int h) 
     : field(new Field(w, h)), 
@@ -26,16 +29,28 @@ void Controller::run() {
     Event* eventHPInc = new eventHeal;
     Event* eventWin = new eventVictory;
     Event* eventLose = new eventDefeat;
-    field->changeCellPassability({1,1}, false);
-    field->setCellEvent({2, 2}, eventHPDec);
-    field->setCellEvent({3, 3}, eventHPInc);
-    field->setCellEvent({5, 5}, eventWin);
-    field->setCellEvent({6, 6}, eventLose);
+    Event* eventBlock = new eventTrap;
+    Event* eventFatten = new eventGetWeight;
+    Event* eventThin = new eventLoseWeight;
+    
+    field->changeCellPassability({2, 2}, false);
+    field->setCellEvent({0, 2}, eventHPDec);
+    field->setCellEvent({0, 4}, eventHPInc);
+    field->setCellEvent({0, 6}, eventWin);
+    field->setCellEvent({0, 8}, eventLose);
+    field->setCellEvent({5, 5}, eventBlock);
+    field->setCellEvent({9, 9}, eventBlock);
+    field->setCellEvent({2, 0}, eventFatten);
+    field->setCellEvent({4, 0}, eventThin);
     FieldView::drawField(*field, field->getPlayerPosition(), player);
 }
 
 Player& Controller::getPlayer(){
     return player;
+}
+
+Field* Controller::getField(){
+    return field;
 }
 
 StateMediator* Controller::getStateMediator() {
@@ -49,7 +64,7 @@ void Controller::onStateChange(GameState newState) {
         mediator->endGame();
     }
     else if(newState == GameState::Loss){
-        //system("cls");
+        system("cls");
         std::cout << "You lost!";
         mediator->endGame();
     }

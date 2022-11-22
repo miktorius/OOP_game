@@ -15,7 +15,7 @@ void FieldView::drawField(const Field &field, Vector2i playerPosition, const Pla
                 //field.getMap()[j][i].detectPlayer();
             }
             else 
-                viewCell.viewCurrentCell(field.getMap()[j][i]);
+                viewCell.viewCurrentCell(field.getMap()[i][j]);
         }
         std::cout << "\n";
     }

@@ -1,13 +1,13 @@
-#ifndef EVENT_HURT
-#define EVENT_HURT
+#ifndef GET_WEIGHT
+#define GET_WEIGHT
 
 #include "../eventCategories/eventPlayer.hpp"
 
-class eventHurt: public playerEvent{
+class eventGetWeight : public playerEvent {
     void execute(Controller& ctrl);
     char getSymbol();
 private:
-    char sym = '~';
+    char sym = '+';
 };
 
 #endif

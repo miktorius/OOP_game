@@ -15,6 +15,7 @@ public:
     Controller(Mediator *mediator, int w, int h);
     Controller(Mediator *mediator);
     Player& getPlayer();
+    Field* getField();
     void run();
     void onCommand(UserCommand cmd);
     StateMediator* getStateMediator();

@@ -1,5 +1,5 @@
-#ifndef EVENT_MAP
-#define EVENT_MAP
+#ifndef EVENT_STATE
+#define EVENT_STATE
 
 #include "../event.hpp"
 
