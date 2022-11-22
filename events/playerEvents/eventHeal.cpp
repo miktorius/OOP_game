@@ -8,3 +8,7 @@ void eventHeal::execute(Controller& ctrl){
     if (HP + heal > maxHP){ player.setHP(maxHP); }
     else { player.setHP(HP + heal); }
 };
+
+char eventHeal::getSymbol(){
+    return sym;
+}

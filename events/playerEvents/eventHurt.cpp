@@ -1,7 +1,7 @@
-#include "eventTrap.hpp"
+#include "eventHurt.hpp"
 #include <iostream>
 
-void eventTrap::execute(Controller& ctrl){
+void eventHurt::execute(Controller& ctrl){
     Player& player = ctrl.getPlayer();
     int dmg = 50;
     int weight = player.getWeight();
@@ -10,4 +10,8 @@ void eventTrap::execute(Controller& ctrl){
         if (HP - dmg < 0){ player.setHP(0); }
         else { player.setHP(HP - dmg); }
     }
+}
+
+char eventHurt::getSymbol(){
+    return sym;
 }

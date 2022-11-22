@@ -11,6 +11,7 @@ public:
     void setPassable(bool passable);
     void setEvent(Event* evnt);
     void activateEvent(Controller& ctrl);
+    Event* getEvent();
     // bool isPlayerDetected();
     // void detectPlayer();
     bool isPassable() const;

@@ -10,6 +10,10 @@ void Cell::activateEvent(Controller& ctrl) {
     if (event!=nullptr) { event->execute(ctrl); }
 }
 
+Event* Cell::getEvent(){
+    return event;
+}
+
 // bool Cell::isPlayerDetected() { return playerDetected; }
 
 // void Cell::detectPlayer() { playerDetected = !playerDetected; }

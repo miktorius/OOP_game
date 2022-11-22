@@ -7,7 +7,7 @@
 
 void FieldView::drawField(const Field &field, Vector2i playerPosition, const Player& player) {
     CellView viewCell;
-    //system("cls");
+    system("cls");
     for(int i = 0; i < field.getSize().y; i++) {
         for(int j = 0; j < field.getSize().x; j++) {
             if (playerPosition.x == j && playerPosition.y == i) {

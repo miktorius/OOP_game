@@ -5,7 +5,7 @@
 
 class CellView{
 public:
-    void viewCurrentCell(const Cell &cell);
+    void viewCurrentCell(Cell &cell);
 };
 
 #endif

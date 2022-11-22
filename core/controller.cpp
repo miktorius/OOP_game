@@ -5,24 +5,32 @@
 #include "../graphics/field_view.hpp"
 #include "../utils/vector2i.hpp"
 #include "../events/playerEvents/eventHeal.hpp"
-#include "../events/playerEvents/eventTrap.hpp"
+#include "../events/playerEvents/eventHurt.hpp"
+#include "../events/stateEvents/eventVictory.hpp"
+#include "../events/stateEvents/eventDefeat.hpp"
 
 Controller::Controller(Mediator *mediator, int w, int h) 
     : field(new Field(w, h)), 
     player(Player()), 
-    mediator(mediator){}
+    mediator(mediator),
+    gameState(GameState::Playing){}
 
 Controller::Controller(Mediator *mediator) 
     : field(new Field), 
     player(Player()),
-    mediator(mediator){}
+    mediator(mediator),
+    gameState(GameState::Playing){}
 
 void Controller::run() {
-    Event* eventHPDec = new eventTrap;
+    Event* eventHPDec = new eventHurt;
     Event* eventHPInc = new eventHeal;
+    Event* eventWin = new eventVictory;
+    Event* eventLose = new eventDefeat;
     field->changeCellPassability({1,1}, false);
     field->setCellEvent({2, 2}, eventHPDec);
     field->setCellEvent({3, 3}, eventHPInc);
+    field->setCellEvent({5, 5}, eventWin);
+    field->setCellEvent({6, 6}, eventLose);
     FieldView::drawField(*field, field->getPlayerPosition(), player);
 }
 
@@ -30,37 +38,22 @@ Player& Controller::getPlayer(){
     return player;
 }
 
-/* 
-
-enum class GameState {Win, Loss, Playing};
-
-class StateMediator {
-private:
-    Controller *c;
-    StateEvent *e;
-public:
-    StateMediator( Controller *ctrl, StateEvent *ev ) : c(ctrl), e(ev);
-    void changeState(GameState newState) {
-        controller->onStateChange(newState);
-    }
-};
-
-Controller / private: GameState gameState (GameState::Playing)
-Controller / public: StateMediator* getStateMediator();
+StateMediator* Controller::getStateMediator() {
+    return stateMediator;
+}
 
 void Controller::onStateChange(GameState newState) {
     if (newState == GameState::Win) {
-        cout << "You won!";
+        system("cls");
+        std::cout << "You won!";
         mediator->endGame();
     }
-
+    else if(newState == GameState::Loss){
+        //system("cls");
+        std::cout << "You lost!";
+        mediator->endGame();
+    }
 }
-
-void VictoryEvent::execute(Controller &ctrl) {
-    ctrl.getStateMediator()->changeState(GameState::Win);
-}
-
-*/ 
 
 void Controller::onCommand(UserCommand cmd){
     Vector2i tmpPos = field->getPlayerPosition();
@@ -92,6 +85,9 @@ void Controller::onCommand(UserCommand cmd){
         if (field->getCellPassability(tmpPos)){
             field->setPlayerPosition(tmpPos);
             field->activateCellEvent(tmpPos, *this);
+        }
+        if (player.getHP() == 0) {
+            stateMediator->changeState(GameState::Loss);
         }
 
         FieldView::drawField(*field, field->getPlayerPosition(), player);

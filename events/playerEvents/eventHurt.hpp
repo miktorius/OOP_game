@@ -1,13 +1,13 @@
-#ifndef EVENT_HEAL
-#define EVENT_HEAL
+#ifndef EVENT_TRAP
+#define EVENT_TRAP
+
 #include "../eventCategories/eventPlayer.hpp"
 
-class eventHeal: public playerEvent{
-public:
+class eventHurt: public playerEvent{
     void execute(Controller& ctrl);
     char getSymbol();
 private:
-    char sym = '@';
+    char sym = '~';
 };
 
 #endif

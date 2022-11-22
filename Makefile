@@ -12,9 +12,13 @@ SOURCES = main.cpp \
 		core\commandreader.cpp \
 		core\controller.cpp \
 		core\mediator.cpp \
+		core\statemediator.cpp \
 		events\event.cpp \
 		events\playerEvents\eventHeal.cpp \
-		events\playerEvents\eventTrap.cpp
+		events\playerEvents\eventHurt.cpp \
+		events\stateEvents\eventVictory.cpp \
+		events\stateEvents\eventDefeat.cpp
+
 
 OBJECTS = $(SOURCES:.cpp=.o)
 
