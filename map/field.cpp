@@ -77,12 +77,15 @@ void Field::setPlayerPosition(Vector2i argPos) { playerPosition = argPos; }
 
 std::vector<std::vector<Cell>> Field::getMap() const { return map; }
 
+Cell& Field::getCell(Vector2i pos){ return map[pos.y][pos.x]; }
+
 void Field::changeCellPassability(Vector2i position, bool passable) {
     map[position.y][position.x].setPassable(passable);
 }
 
-void Field::setCellEvent(Vector2i position, Event* evnt){
+void Field::setCellEvent(Vector2i position, Event* evnt, eventType tileType){
     map[position.y][position.x].setEvent(evnt);
+    map[position.y][position.x].setType(tileType);   
 }
 
 void Field::activateCellEvent(Vector2i position, Controller& ctrl){

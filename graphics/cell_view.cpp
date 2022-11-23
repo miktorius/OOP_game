@@ -6,7 +6,28 @@ void CellView::viewCurrentCell(Cell &cell) {
         std::cout << (cell.isPassable() ? "_ " : "# ");
     }
     else {
-        std::cout << (cell.getEvent()->getSymbol()) << " ";
+        switch (cell.getType()){
+            case eventType::HURT:
+                std::cout << "~ ";
+                break;
+            case eventType::HEAL:
+                std::cout << "@ ";
+                break;
+            case eventType::GETWEIGHT:
+                std::cout << "+ ";
+                break;
+            case eventType::LOSEWEIGHT:
+                std::cout << "- ";
+                break;
+            case eventType::TRAP:
+                std::cout << "? ";
+                break;
+            case eventType::VICTORY:
+                std::cout << "$ ";
+                break;
+            case eventType::DEFEAT:
+                std::cout << "! ";
+                break;
+        }
     }
-    
 }

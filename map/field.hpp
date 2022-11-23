@@ -5,8 +5,8 @@ class Field;
 
 #include <vector>
 #include "../utils/vector2i.hpp"
-//#include "../events/event.hpp"
 #include "cell.hpp"
+#include "../utils/eventType.hpp"
 
 class Field {
 private:
@@ -34,9 +34,11 @@ public:
 
     std::vector<std::vector<Cell>> getMap() const;
 
+    Cell& getCell(Vector2i pos);
+
     void changeCellPassability(Vector2i position, bool passable);
 
-    void setCellEvent(Vector2i position, Event* evnt);
+    void setCellEvent(Vector2i position, Event* evnt, eventType tileType);
 
     void activateCellEvent(Vector2i position, Controller& ctrl);
 

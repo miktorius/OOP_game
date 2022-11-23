@@ -1,6 +1,6 @@
 #include "cell.hpp"
 
-Cell::Cell(bool passable/*, bool detection*/) : passability(passable), event(nullptr)/*, playerDetected(detection)*/ {}
+Cell::Cell(bool passable/*, bool detection*/) : passability(passable), event(nullptr) {}
 
 void Cell::setPassable(bool passable) { passability = passable; }
 
@@ -9,6 +9,11 @@ void Cell::setEvent(Event* evnt) { event = evnt; }
 void Cell::activateEvent(Controller& ctrl) {
     if (event!=nullptr) { event->execute(ctrl); }
 }
+
+void Cell::setType(eventType tileType){ type = tileType; }
+
+eventType Cell::getType(){ return type; }
+
 
 Event* Cell::getEvent(){
     return event;

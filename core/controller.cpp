@@ -34,14 +34,14 @@ void Controller::run() {
     Event* eventThin = new eventLoseWeight;
     
     field->changeCellPassability({2, 2}, false);
-    field->setCellEvent({0, 2}, eventHPDec);
-    field->setCellEvent({0, 4}, eventHPInc);
-    field->setCellEvent({0, 6}, eventWin);
-    field->setCellEvent({0, 8}, eventLose);
-    field->setCellEvent({5, 5}, eventBlock);
-    field->setCellEvent({9, 9}, eventBlock);
-    field->setCellEvent({2, 0}, eventFatten);
-    field->setCellEvent({4, 0}, eventThin);
+    field->setCellEvent({0, 2}, eventHPDec, eventType::HURT);
+    field->setCellEvent({0, 4}, eventHPInc, eventType::HEAL);
+    field->setCellEvent({0, 6}, eventWin, eventType::VICTORY);
+    field->setCellEvent({0, 8}, eventLose, eventType::DEFEAT);
+    field->setCellEvent({5, 5}, eventBlock, eventType::TRAP);
+    field->setCellEvent({9, 9}, eventBlock, eventType::TRAP);
+    field->setCellEvent({2, 0}, eventFatten, eventType::GETWEIGHT);
+    field->setCellEvent({4, 0}, eventThin, eventType::LOSEWEIGHT);
     FieldView::drawField(*field, field->getPlayerPosition(), player);
 }
 
