@@ -5,9 +5,6 @@
 
 class eventLoseWeight : public playerEvent {
     void execute(Controller& ctrl);
-    char getSymbol();
-private:
-    char sym = '-';
 };
 
 #endif

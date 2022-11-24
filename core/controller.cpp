@@ -60,12 +60,12 @@ StateMediator* Controller::getStateMediator() {
 void Controller::onStateChange(GameState newState) {
     if (newState == GameState::Win) {
         system("cls");
-        std::cout << "You won!";
+        std::cout << "\nYou won!";
         mediator->endGame();
     }
     else if(newState == GameState::Loss){
         system("cls");
-        std::cout << "You lost!";
+        std::cout << "\nYou lost!";
         mediator->endGame();
     }
 }

@@ -8,10 +8,7 @@ class Event;
 class Event {
 public:
     virtual void execute(Controller& ctrl) = 0;
-    virtual char getSymbol() = 0;
     // virtual ~Event() = default;
 };
 
 #endif
-// Event *ev = HealPlayerEvent(...); ev->call(...)
-// 

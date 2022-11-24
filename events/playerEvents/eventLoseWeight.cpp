@@ -7,7 +7,3 @@ void eventLoseWeight::execute(Controller& ctrl){
     if (weight - loss < 0){ player.setWeight(0); }
     else { player.setWeight(weight - loss); }
 }
-
-char eventLoseWeight::getSymbol(){
-    return sym;
-}

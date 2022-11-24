@@ -11,7 +11,3 @@ void eventHurt::execute(Controller& ctrl){
         else { player.setHP(HP - dmg); }
     }
 }
-
-char eventHurt::getSymbol(){
-    return sym;
-}

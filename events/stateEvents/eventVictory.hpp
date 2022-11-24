@@ -6,9 +6,6 @@
 class eventVictory : public eventState{
 public:
     void execute(Controller& ctrl);
-    char getSymbol();
-private:
-    char sym = '$';
 };
 
 #endif

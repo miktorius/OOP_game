@@ -8,7 +8,3 @@ void eventGetWeight::execute(Controller& ctrl){
     if (weight + gain > maxWeight){ player.setWeight(maxWeight); }
     else { player.setWeight(weight + gain); }
 }
-
-char eventGetWeight::getSymbol(){
-    return sym;
-}
