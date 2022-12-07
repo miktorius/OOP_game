@@ -9,17 +9,24 @@
 #include "mediator.hpp"
 #include "../utils/gameState.hpp"
 #include "statemediator.hpp"
+#include "../log/observable.hpp"
 
-class Controller {
+class Controller : public Observable{
 public:
     Controller(Mediator *mediator, int w, int h);
     Controller(Mediator *mediator);
+
     Player& getPlayer();
     Field* getField();
+    StateMediator* getStateMediator();
+
     void run();
     void onCommand(UserCommand cmd);
-    StateMediator* getStateMediator();
     void onStateChange(GameState newState);
+    void setSize(Vector2i size);
+    void setState(GameState state);
+    GameState getState();
+
 private:
     Field *field;
     Player player;

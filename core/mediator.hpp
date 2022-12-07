@@ -6,8 +6,9 @@ enum class UserCommand {
 };
 #include "commandreader.hpp"
 #include "controller.hpp"
+#include "../log/observable.hpp"
 
-class Mediator {
+class Mediator : public Observable{
 public:
     Mediator();
     void start();
@@ -20,6 +21,7 @@ private:
     CommandReader *commandReader;
     Controller *controller;
     bool isGameOK;
+    void configureLogging();
 };
 
 #endif

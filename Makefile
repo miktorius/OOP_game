@@ -20,7 +20,16 @@ SOURCES = main.cpp \
 		events\playerEvents\eventLoseWeight.cpp \
 		events\stateEvents\eventVictory.cpp \
 		events\stateEvents\eventDefeat.cpp \
-		events\mapEvents\eventTrap.cpp
+		events\mapEvents\eventTrap.cpp \
+		log\console_logger.cpp \
+		log\file_logger.cpp \
+		log\logger_pool.cpp \
+		log\logger.cpp \
+		log\message.cpp \
+		log\observable.cpp \
+		log\messages\event_messages.cpp \
+		log\messages\player_messages.cpp \
+		log\messages\game_state_messages.cpp
 
 
 OBJECTS = $(SOURCES:.cpp=.o)

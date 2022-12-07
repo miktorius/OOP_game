@@ -1,5 +1,7 @@
 #include "eventDefeat.hpp"
+#include "../../log/messages/event_messages.hpp"
 
 void eventDefeat::execute(Controller& ctrl){
-    ctrl.getStateMediator()->changeState(GameState::Loss);
+    notify(EventMessages::lose());
+    ctrl.onStateChange(GameState::Loss);
 }

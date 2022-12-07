@@ -74,7 +74,8 @@ void CommandReader::readSize() {
             break;
         }
         else if (input == "2"){
-            mediator->notifySize();
+            system("cls");
+            mediator->notifySize(10, 10);
             break;
         }
         else if (input == "q") {

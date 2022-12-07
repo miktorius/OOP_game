@@ -1,4 +1,5 @@
 #include "eventHeal.hpp"
+#include "../../log/messages/event_messages.hpp"
 
 void eventHeal::execute(Controller& ctrl){
     int heal = 10;
@@ -7,4 +8,5 @@ void eventHeal::execute(Controller& ctrl){
     int HP = player.getHP();
     if (HP + heal > maxHP){ player.setHP(maxHP); }
     else { player.setHP(HP + heal); }
+    notify(EventMessages::playerHealed());
 };
