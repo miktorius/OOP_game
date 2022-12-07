@@ -91,9 +91,11 @@ void Controller::onStateChange(GameState newState) {
     setState(newState);
     if (getState() == GameState::Win) {
         notify(GameStateMessages::gameVictory());
+        std::cout << "\nYou won!";
     }
     else if(getState() == GameState::Loss){
         notify(GameStateMessages::gameDefeat());
+        std::cout << "\nYou lost!";
     }
     notify(GameStateMessages::gameEnd());
     mediator->endGame();
@@ -115,11 +117,12 @@ void Controller::onCommand(UserCommand cmd){
         tmpPos.x += 1;
         break;
     case UserCommand::ESC:
+        system("cls");
+        notify(GameStateMessages::gameEnd());
         mediator->endGame();
         break;
     }
     if (cmd == UserCommand::ESC) {
-        system("cls");
     }
     else {
         system("cls");
@@ -132,10 +135,7 @@ void Controller::onCommand(UserCommand cmd){
             field->activateCellEvent(tmpPos, *this);
         }
         else { notify(PlayerMessages::triedToPassSolidCell(tmpPos)); }
-        if (player.getHP() == 0) {
-            onStateChange(GameState::Loss);
-        }
-
-        FieldView::drawField(*field, field->getPlayerPosition(), player);
+        if (player.getHP() == 0) { onStateChange(GameState::Loss); }
+        if (gameState == GameState::Playing){ FieldView::drawField(*field, field->getPlayerPosition(), player); }
     }
 }
