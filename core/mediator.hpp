@@ -1,14 +1,16 @@
 #ifndef GAME_MEDIATOR_HPP
 #define GAME_MEDIATOR_HPP
-class Mediator;
-enum class UserCommand {
-    UP, DOWN, LEFT, RIGHT, ESC, UNKNOWN
-};
-#include "commandreader.hpp"
-#include "controller.hpp"
-#include "../log/observable.hpp"
 
-class Mediator : public Observable{
+class Mediator;
+
+#include "controls/usercommand.hpp"
+#include "controls/event_reader.hpp"
+#include "controls/controls_storage.hpp"
+
+#include "controller.hpp"
+
+
+class Mediator{
 public:
     Mediator();
     void start();
@@ -18,7 +20,7 @@ public:
     bool gameIsRunning() const;
     void endGame();
 private:
-    CommandReader *commandReader;
+    EventReader *commandReader;
     Controller *controller;
     bool isGameOK;
     void configureLogging();

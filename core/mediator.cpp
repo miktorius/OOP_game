@@ -5,12 +5,22 @@
 #include "../log/file_logger.hpp"
 #include "../log/logger_pool.hpp"
 #include "../log/messages/game_state_messages.hpp"
+#include "controls/commandreader.hpp"
 
-Mediator::Mediator() : isGameOK(false), commandReader(new CommandReader(this)), controller(new Controller(this)) { configureLogging(); }
+Mediator::Mediator() : isGameOK(false) {
+    ControlsStorage storage;
+    try {
+        storage = ControlsStorage("controls.txt");
+    } catch (std::invalid_argument &e) {
+        // storage is already created with default configuration
+    }
+    commandReader = new CommandReader(this, storage);
+    controller = new Controller(this);
+    configureLogging(); 
+}
 
 void Mediator::start() {
     isGameOK = true;
-    commandReader->readSize();
     commandReader->readCommands();
 }
 
@@ -73,7 +83,6 @@ void Mediator::configureLogging() {
                 logger->addLogType(LogType::CriticalState);
                 
             controller->subscribe(logger);
-            this->copySubscriptions(controller);
             loggerPool.addLogger(logger);
         }
 

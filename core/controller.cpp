@@ -91,11 +91,11 @@ void Controller::onStateChange(GameState newState) {
     setState(newState);
     if (getState() == GameState::Win) {
         notify(GameStateMessages::gameVictory());
-        std::cout << "\nYou won!";
+        std::cout << "You won!\n";
     }
     else if(getState() == GameState::Loss){
         notify(GameStateMessages::gameDefeat());
-        std::cout << "\nYou lost!";
+        std::cout << "You lost!\n";
     }
     notify(GameStateMessages::gameEnd());
     mediator->endGame();

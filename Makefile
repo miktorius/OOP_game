@@ -9,10 +9,11 @@ SOURCES = main.cpp \
 		graphics\cell_view.cpp \
 		entities\entity.cpp \
 		entities\player.cpp \
-		core\commandreader.cpp \
 		core\controller.cpp \
 		core\mediator.cpp \
 		core\statemediator.cpp \
+		core\controls\commandreader.cpp \
+		core\controls\controls_storage.cpp \
 		events\event.cpp \
 		events\playerEvents\eventHeal.cpp \
 		events\playerEvents\eventHurt.cpp \

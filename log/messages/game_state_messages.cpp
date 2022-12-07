@@ -5,10 +5,10 @@ Message GameStateMessages::gameStart() {
 }
 
 Message GameStateMessages::gameVictory() {
-    return Message(LogType::GameState, "Win!");
+    return Message(LogType::GameState, "Victory!");
 }
 Message GameStateMessages::gameDefeat() {
-    return Message(LogType::GameState, "Loss!");
+    return Message(LogType::GameState, "Defeat!");
 }
 
 Message GameStateMessages::gameEnd() {
