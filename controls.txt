@@ -1,5 +1,5 @@
 up: w
 left: a
-right: d
 down: s
+right: d
 esc: q

@@ -13,7 +13,7 @@ ControlsStorage::ControlsStorage() {
     };
     for (std::string line : config) {
         auto p = process(line);
-        m_binds[p.first] = p.second;
+        binds[p.first] = p.second;
     }
 }
 /// @brief Takes configuration from specified file.
@@ -29,15 +29,15 @@ ControlsStorage::ControlsStorage(const std::string &controlsFile) {
 
     for( std::string line; getline( file, line ); ){
         auto p = process(line);
-        m_binds[p.first] = p.second;
+        binds[p.first] = p.second;
     }
 
     file.close();
 }
 
 UserCommand ControlsStorage::userCommandFromChar(char key) const {
-    if (m_binds.count(key))
-        return m_binds.at(key);
+    if (binds.count(key))
+        return binds.at(key);
         
     return UserCommand::UNKNOWN;
 } 

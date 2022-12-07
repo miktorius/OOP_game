@@ -8,7 +8,7 @@
 
 class ControlsStorage {
 private:
-    std::map<char, UserCommand> m_binds;
+    std::map<char, UserCommand> binds;
     std::pair<char, UserCommand> process(const std::string &line);
 public:
     ControlsStorage();
