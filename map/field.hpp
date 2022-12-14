@@ -28,6 +28,8 @@ public:
 
     Vector2i getSize() const;
 
+    void setSize(Vector2i size);
+
     Vector2i getPlayerPosition() const;
 
     void setPlayerPosition(Vector2i argPos);

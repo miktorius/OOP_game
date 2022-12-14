@@ -18,6 +18,7 @@ public:
     void notifySize(int x, int y);
     void notifySize();
     bool gameIsRunning() const;
+    void launchController();
     void endGame();
 private:
     EventReader *commandReader;

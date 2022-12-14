@@ -35,8 +35,7 @@ void Mediator::notify(UserCommand cmd){
     controller->onCommand(cmd);
 }
 
-void Mediator::notifySize(int x, int y){
-    controller->setSize({x, y});
+void Mediator::launchController(){
     controller->run();
 }
 
@@ -44,7 +43,7 @@ void Mediator::configureLogging() {
     system("cls");
     auto &loggerPool = LoggerPool::getInstance();
     std::cout << "Logging configuration.\n";
-    std::cout << "Enter 0 to skip, 1 to add ConsoleLogger, 2 to add FileLogger\n";
+    std::cout << "Enter 0 to skip, 1 to add ConsoleLogger, 2 to add FileLogger : ";
     int choice;
     std::cin >> choice;
 

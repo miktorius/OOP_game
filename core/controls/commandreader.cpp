@@ -6,7 +6,8 @@ CommandReader::CommandReader(Mediator *notifier, ControlsStorage controls) : med
 
 void CommandReader::readCommands() const{
     system("cls");
-    mediator->notifySize(10, 10);
+    
+    mediator->launchController();
     while(mediator->gameIsRunning()) {
         std::string tmp;
         std::cin >> tmp;

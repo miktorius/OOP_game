@@ -4,6 +4,7 @@
 #include "../map/field.hpp"
 #include "../graphics/field_view.hpp"
 #include "../utils/vector2i.hpp"
+#include "../utils/level_type.hpp"
 
 #include "../events/playerEvents/eventHeal.hpp"
 #include "../events/playerEvents/eventHurt.hpp"
@@ -16,53 +17,67 @@
 #include "../log/messages/player_messages.hpp"
 #include "../log/messages/game_state_messages.hpp"
 
+#include "../map/generation/map_generator.hpp"
+#include "../map/generation/rules/field_size_rule.hpp"
+#include "../map/generation/rules/damage_position_rule.hpp"
+#include "../map/generation/rules/obstacles_rule.hpp"
+#include "../map/generation/rules/player_position_rule.hpp"
+#include "../map/generation/rules/win_position_rule.hpp"
+
+
 Controller::Controller(Mediator *mediator, int w, int h) 
-    : field(new Field(w, h)), 
-    player(Player()), 
+    : player(Player()), 
     mediator(mediator),
     gameState(GameState::Playing){}
 
 Controller::Controller(Mediator *mediator) 
-    : field(new Field), 
-    player(Player()),
+    : player(Player()),
     mediator(mediator),
     gameState(GameState::Playing){}
 
 void Controller::run() {
 
+
+    Level chosen;
+    std::cout << "Choose level (1,2) : ";
+    int c;
+    std:: cin >> c;
+    switch(c){
+    case 1:
+        chosen = Level::ONE;
+        break;
+    case 2:
+        chosen = Level::TWO;
+        break;  
+    default:
+        system("cls");
+        std::cout << "Input error. Choose level (1,2) :";
+        std::cin >> c;
+    }
+
+    if (chosen == Level::ONE) {
+        MapGenerator <
+            FieldSizeRule<15,10>,
+            ObstaclesRule<ObstaclesVariant::ROOMS>,
+            PlayerPositionRule<1,1>,
+            WinEventPositionRule<15-2,10-2>,
+            DamageEventRule<20>
+        > gena;
+        field = gena.generate();
+    }
+    else if (chosen == Level::TWO) {
+        MapGenerator <
+            FieldSizeRule<8,12>,
+            ObstaclesRule<ObstaclesVariant::SPIRAL>,
+     		WinEventPositionRule<(8-1)/2,12/2>,
+            PlayerPositionRule<1,1>
+        > gena;
+        field = gena.generate();
+    }
+
+    system("cls");
     notify(GameStateMessages::gameStart());
-
-    Event* eventHPDec = new eventHurt;
-    Event* eventHPInc = new eventHeal;
-    Event* eventWin = new eventVictory;
-    Event* eventLose = new eventDefeat;
-    Event* eventBlock = new eventTrap;
-    Event* eventFatten = new eventGetWeight;
-    Event* eventThin = new eventLoseWeight;
-
-    eventHPDec->copySubscriptions(this);
-    eventHPInc->copySubscriptions(this);
-    eventWin->copySubscriptions(this);
-    eventLose->copySubscriptions(this);
-    eventBlock->copySubscriptions(this);
-    eventFatten->copySubscriptions(this);
-    eventThin->copySubscriptions(this);
-
-    field->changeCellPassability({2, 2}, false);
-    field->setCellEvent({0, 2}, eventHPDec, eventType::HURT);
-    field->setCellEvent({0, 4}, eventHPInc, eventType::HEAL);
-    field->setCellEvent({0, 6}, eventWin, eventType::VICTORY);
-    field->setCellEvent({0, 8}, eventLose, eventType::DEFEAT);
-    field->setCellEvent({5, 5}, eventBlock, eventType::TRAP);
-    field->setCellEvent({9, 9}, eventBlock, eventType::TRAP);
-    field->setCellEvent({2, 0}, eventFatten, eventType::GETWEIGHT);
-    field->setCellEvent({4, 0}, eventThin, eventType::LOSEWEIGHT);
     FieldView::drawField(*field, field->getPlayerPosition(), player);
-}
-
-void Controller::setSize(Vector2i size){
-    this->w = size.x;
-    this->h = size.y;
 }
 
 Player& Controller::getPlayer(){

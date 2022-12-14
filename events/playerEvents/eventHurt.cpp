@@ -2,8 +2,9 @@
 #include "../../log/messages/event_messages.hpp"
 
 void eventHurt::execute(Controller& ctrl){
+    this->copySubscriptions(&ctrl);
     Player& player = ctrl.getPlayer();
-    int dmg = 50;
+    int dmg = 20;
     int weight = player.getWeight();
     int HP = player.getHP();
     if (weight >= 50){

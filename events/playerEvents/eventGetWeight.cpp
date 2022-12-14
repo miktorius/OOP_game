@@ -3,6 +3,7 @@
 
 
 void eventGetWeight::execute(Controller& ctrl){
+    this->copySubscriptions(&ctrl);
     int gain = 10;
     Player& player = ctrl.getPlayer();
     int maxWeight = player.getMaxWeight();

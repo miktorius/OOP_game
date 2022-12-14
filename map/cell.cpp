@@ -1,6 +1,6 @@
 #include "cell.hpp"
 
-Cell::Cell(bool passable/*, bool detection*/) : passability(passable), event(nullptr) {}
+Cell::Cell(bool passable) : passability(passable), event(nullptr) {}
 
 void Cell::setPassable(bool passable) { passability = passable; }
 

@@ -71,6 +71,15 @@ Field::~Field() {
 
 Vector2i Field::getSize() const { return {width, height}; }
 
+void Field::setSize(Vector2i size){
+    width = size.x;
+    height = size.y;
+    map = std::vector<std::vector<Cell>>(
+        height, 
+        std::vector<Cell>(width, Cell())
+        );
+}
+
 Vector2i Field::getPlayerPosition() const { return playerPosition; }
 
 void Field::setPlayerPosition(Vector2i argPos) { playerPosition = argPos; }

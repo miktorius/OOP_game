@@ -4,9 +4,6 @@
 #include <vector>
 #include <iostream>
 
-
-/// @brief 
-/// Standart configuration (WASD E Q)
 ControlsStorage::ControlsStorage() {
     std::vector<std::string> config = {
         "up: w", "down: s", "right: d", "left: a", "use: e", "esc: q"
@@ -16,9 +13,7 @@ ControlsStorage::ControlsStorage() {
         binds[p.first] = p.second;
     }
 }
-/// @brief Takes configuration from specified file.
-/// Throws std::invalid_argument if file does not exist
-/// @param controlsFile 
+
 ControlsStorage::ControlsStorage(const std::string &controlsFile) {
     std::ifstream file;
     file.open(controlsFile);
