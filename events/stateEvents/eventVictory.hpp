@@ -6,6 +6,8 @@
 class eventVictory : public eventState{
 public:
     void execute(Controller& ctrl);
+    std::string toString() const;
+
 };
 
 #endif

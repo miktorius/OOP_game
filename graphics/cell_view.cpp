@@ -8,7 +8,7 @@ void CellView::viewCurrentCell(Cell &cell) {
     else {
         switch (cell.getType()){
             case eventType::HURT:
-                std::cout << "~ ";
+                std::cout << "@ ";
                 break;
             case eventType::HEAL:
                 std::cout << "@ ";
@@ -27,6 +27,9 @@ void CellView::viewCurrentCell(Cell &cell) {
                 break;
             case eventType::DEFEAT:
                 std::cout << "! ";
+                break;
+            default:
+                std::cout << "@ ";
                 break;
         }
     }

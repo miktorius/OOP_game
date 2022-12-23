@@ -1,7 +1,9 @@
 #ifndef ENTITY_HPP
 #define ENTITY_HPP
 
-class Entity {
+#include "../utils/saveable_component.hpp"
+
+class Entity : public SaveableComponent{
 public:
     Entity(
         int hp, int weight, int damage,
@@ -18,6 +20,10 @@ public:
 
     int getMaxHP() const;
     int getMaxWeight() const;
+
+    std::string toString() const;
+    static Entity fromString(std::string str);
+
 private:
     int hp,
         weight,

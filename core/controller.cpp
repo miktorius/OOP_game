@@ -1,6 +1,7 @@
 #include "controller.hpp"
 #include <iostream>
 #include <stdlib.h>
+#include <sstream>
 #include "../map/field.hpp"
 #include "../graphics/field_view.hpp"
 #include "../utils/vector2i.hpp"
@@ -24,6 +25,10 @@
 #include "../map/generation/rules/player_position_rule.hpp"
 #include "../map/generation/rules/win_position_rule.hpp"
 
+#include "../map/save/file_map_saver.hpp"
+#include "../map/save/save_file_loader.hpp"
+
+#include "../exceptions/loading_map_exception.hpp"
 
 Controller::Controller(Mediator *mediator, int w, int h) 
     : player(Player()), 
@@ -36,7 +41,6 @@ Controller::Controller(Mediator *mediator)
     gameState(GameState::Playing){}
 
 void Controller::run() {
-
 
     Level chosen;
     std::cout << "Choose level (1,2) : ";
@@ -75,7 +79,9 @@ void Controller::run() {
         field = gena.generate();
     }
 
-    system("cls");
+    // std::cout << field->toString();
+
+    //system("cls");
     notify(GameStateMessages::gameStart());
     FieldView::drawField(*field, field->getPlayerPosition(), player);
 }
@@ -136,11 +142,20 @@ void Controller::onCommand(UserCommand cmd){
         notify(GameStateMessages::gameEnd());
         mediator->endGame();
         break;
+    case UserCommand::LOAD:
+        std::cout << "Got load cmd\n";
+        loadMapConfig();
+        tmpPos = field->getPlayerPosition();
+        break;
+    case UserCommand::SAVE: // blyat
+    std::cout << "Got save cmd\n";
+        saveMapConfig();
+        break;
     }
     if (cmd == UserCommand::ESC) {
     }
     else {
-        system("cls");
+        //system("cls");
         auto size = field->getSize();
         tmpPos.x = (tmpPos.x + size.x) % size.x;
         tmpPos.y = (tmpPos.y + size.y) % size.y;
@@ -154,3 +169,36 @@ void Controller::onCommand(UserCommand cmd){
         if (gameState == GameState::Playing){ FieldView::drawField(*field, field->getPlayerPosition(), player); }
     }
 }
+
+void Controller::loadMapConfig(){
+    std::string filename;
+    std::cout << "Enter filename: ";
+    std::cin >> filename;  
+    try{
+        SaveFileLoader loader(filename);
+        field = loader.loadMap(player);
+    }
+    catch (const Exceptions::LoadingMapException& ex) {
+        std::cout << ex.what() << "\n";
+    }
+}
+
+// try to compile
+
+void Controller::saveMapConfig() {
+
+    FileMapSaver saver;
+    std::string saveName;
+    std::cout << "Enter save name: ";
+    std::cin >> saveName;  
+    saver.saveMap(*field, saveName, player);
+}
+    
+
+// std::string Controller::playerToString() const {
+//         std::stringstream sstr;
+
+//     sstr << "{Player}\n" << player->creature << '\n' << player->position.x << " " << player->position.y << '\n';
+//     return sstr.str();
+
+// }

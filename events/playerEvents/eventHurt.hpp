@@ -5,6 +5,7 @@
 
 class eventHurt: public playerEvent{
     void execute(Controller& ctrl);
+    std::string toString() const;
 };
 
 #endif

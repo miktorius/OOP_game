@@ -3,3 +3,5 @@ left: a
 down: s
 right: d
 esc: q
+load: l
+save: m

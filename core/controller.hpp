@@ -26,6 +26,10 @@ public:
     void setSize(Vector2i size);
     void setState(GameState state);
     GameState getState();
+    //std::string playerToString() const;
+
+    void loadMapConfig();
+    void saveMapConfig();
 
 private:
     Field *field;

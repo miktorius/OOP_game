@@ -13,3 +13,9 @@ void eventHurt::execute(Controller& ctrl){
         notify(EventMessages::playerDamaged(player.getHP()));
     }
 }
+
+std::string eventHurt::toString() const {
+    std::stringstream stream;
+    stream << "<Event name={damage}>";
+    return stream.str();
+}

@@ -8,3 +8,7 @@ void eventVictory::execute(Controller& ctrl){
         ctrl.onStateChange(GameState::Win);
     }
 }
+
+std::string eventVictory::toString() const {
+    return "<Event name={win}>";
+}

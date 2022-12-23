@@ -4,11 +4,13 @@
 class Field;
 
 #include <vector>
+#include <sstream>
 #include "../utils/vector2i.hpp"
 #include "cell.hpp"
 #include "../utils/eventType.hpp"
+#include "../utils/saveable_component.hpp"
 
-class Field {
+class Field : public SaveableComponent{
 private:
     int width;
     int height;
@@ -41,10 +43,15 @@ public:
     void changeCellPassability(Vector2i position, bool passable);
 
     void setCellEvent(Vector2i position, Event* evnt, eventType tileType);
+    void setCell(Vector2i position, Cell cell);
 
     void activateCellEvent(Vector2i position, Controller& ctrl);
 
     bool getCellPassability(Vector2i position) const;
+
+    friend std::ostream &operator<<(std::ostream &stream, const Field &map);
+    std::string toString() const;
+
 };
 
 #endif

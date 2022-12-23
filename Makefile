@@ -30,8 +30,14 @@ SOURCES = main.cpp \
 		log\observable.cpp \
 		log\messages\event_messages.cpp \
 		log\messages\player_messages.cpp \
-		log\messages\game_state_messages.cpp
-
+		log\messages\game_state_messages.cpp \
+		map\save\file_map_saver.cpp \
+		utils\string_utilities.cpp \
+		map\save\save_file_loader.cpp \
+		events\test_event_creator.cpp \
+		exceptions\loading_map_exception.cpp \
+		exceptions\slon_exception.cpp
+		
 
 OBJECTS = $(SOURCES:.cpp=.o)
 

@@ -6,7 +6,7 @@
 
 ControlsStorage::ControlsStorage() {
     std::vector<std::string> config = {
-        "up: w", "down: s", "right: d", "left: a", "use: e", "esc: q"
+        "up: w", "down: s", "right: d", "left: a", "use: e", "esc: q", "load: l", "save: m"
     };
     for (std::string line : config) {
         auto p = process(line);
@@ -44,7 +44,9 @@ std::pair<char, UserCommand> ControlsStorage::process(const std::string &line) {
         {"down", UserCommand::DOWN},
         {"right", UserCommand::RIGHT},
         {"left", UserCommand::LEFT},
-        {"esc", UserCommand::ESC}
+        {"esc", UserCommand::ESC},
+        {"load", UserCommand::LOAD},
+        {"save", UserCommand::SAVE}
     }; 
 
     std::string name = "";
